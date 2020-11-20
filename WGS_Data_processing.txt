@@ -1,0 +1,13 @@
+#bwa
+bwa mem -M -t 5 -R "@RG\tID:ADB_Blood\tLB:1\tSM:ADB_Blood\tPL:ILLUMINA" ./ref/hg38_v0_Homo_sapiens_assembly38.fasta ../data/CancerEvolution_WGS/fastq/ADB_Blood_DNA_R1.fastq.gz ../data/CancerEvolution_WGS/fastq/ADB_Blood_DNA_R2.fastq.gz > ADB_Blood.sam 2> ADB_Blood.bwamem.out
+#sam to bam
+samtools view -Sb -@ 3 -o $sampleName.bam $sampleName.sam > $sampleName.StoB.out 2>&1
+rm $sampleName.sam
+#sort
+samtools sort -@ 3 -o $sampleName.s.bam $sampleName.bam > $sampleName.sort.out 2>&1
+rm $sampleName.bam
+#Markdup.
+java -XX:ParallelGCThreads=5 -XX:ConcGCThreads=5  -Xms12g -Xmx20g -jar ~/anaconda3/pkgs/picard-2.23.8-0/share/picard-2.23.8-0/picard.jar MarkDuplicates REMOVE_DUPLICATES=true REMOVE_SEQUENCING_DUPLICATES=true I= $sampleName.sorted.bam  O= $sampleName.sorted.MD.bam M= $sampleName.sorted.metrics.txt VALIDATION_STRINGENCY=LENIENT CREATE_INDEX=true
+#Base recalib.
+gatk --java-options -"Xms12G" BaseRecalibrator -R ~/ref/hg38_v0_Homo_sapiens_assembly38.fasta -I $sampleName.sorted.MD.bam --known-sites ~/ref/hg38_v0_Mills_and_1000G_gold_standard.indels.hg38.vcf -known-sites ~/ref/hg38_v0_Homo_sapiens_assembly38.dbsnp138.vcf -O $sampleName.s.md.bam.table 
+gatk --java-options -"Xms12G"  ApplyBQSR  -R ~/ref/hg38_v0_Homo_sapiens_assembly38.fasta -I $sampleName.sorted.MD.bam --bqsr-recal-file $sampleName.s.md.bam.table -O $sampleName.s.md.br.bam > $sampleName.BR.out 2>&1

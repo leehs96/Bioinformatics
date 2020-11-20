@@ -1,0 +1,15 @@
+sh bam1.sh ADB_Blood &> ADB_Blood_run.out
+sh bam1.sh ADB_LL &> ADB_LL_run.out 
+sh bam1.sh ADB_LM &> ADB_LM_run.out 
+sh bam1.sh ADB_UL &> ADB_UL_run.out 
+sh bam1.sh ADB_UM &> ADB_UM_run.out 
+sh bam1.sh LMS_Blood &> LMS_Blood_run.out 
+sh bam1.sh LMS_Cancer &> LMS_Cancer_run.out 
+sh bam1.sh LMS_LN_3L1 &> LMS_LN_3L1_run.out 
+sh bam1.sh LMS_LN_3R1 &> LMS_LN_3R1_run.out 
+sh bam1.sh LMS_Recur &> LMS_Recur.out 
+sh bam1.sh SJH_Blood &> SJH_Blood.out 
+sh bam1.sh SJH_Cen1 &> SJH_Cen1.out 
+sh bam1.sh SJH_Isth &> SJH_Isth.out 
+sh bam1.sh SJH_Lat &> SJH_Lat.out 
+sh bam1.sh SJH_LN  &> SJH_LN.out 

@@ -1,0 +1,12 @@
+sh bcftool.sh ADB_LL
+sh bcftool.sh ADB_LM  
+sh bcftool.sh ADB_UL  
+sh bcftool.sh ADB_UM
+sh bcftool.sh LMS_Cancer
+sh bcftool.sh LMS_LN_3R1
+sh bcftool.sh LMS_LN_3L1
+sh bcftool.sh LMS_Recur
+sh bcftool.sh SJH_Cen1
+sh bcftool.sh SJH_Isth
+sh bcftool.sh SJH_Lat
+sh bcftool.sh SJH_LN
